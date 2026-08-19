@@ -7,7 +7,6 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
 }
 
 /// Perfis aceitos no sistema.
@@ -27,5 +26,7 @@ model usuario {
   role         PerfilUsuario
   createdat     DateTime          @default(now())
   updatedat     DateTime          @default(now())
+  localizationLatitude String?
+  localizationLongetude String?
 
 }
