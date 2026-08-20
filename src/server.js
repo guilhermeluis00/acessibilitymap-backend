@@ -11,6 +11,11 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(router);
+
+// rota de teste do backend 
+
+app.get('/teste', async (req, res) => {
+}  )
  
 //portServer = 74203
 
