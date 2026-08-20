@@ -2,6 +2,7 @@ const express = require('express');
 const JWT = require('jsonwebtoken');
 const { cadastrarUsuario } = require('./cadastro');
 const { loginUsuario } = require('./login');
+const { exibirUsuario } = require('./dados');
 const prisma = require('./lib/prisma');
 
 const router = express.Router();

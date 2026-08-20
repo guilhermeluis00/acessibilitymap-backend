@@ -27,7 +27,7 @@ model usuario {
   createdat     DateTime          @default(now())
   updatedat     DateTime          @default(now())
   localizationLatitude String?
-  localizationLongetude String?
+  localizationLongitude String?
   visualization Boolean           @default(true)
 
 }
