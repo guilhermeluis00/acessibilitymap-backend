@@ -12,9 +12,8 @@ app.use(cors());
 app.use(express.json());
 app.use(router);
  
+//portServer = 74203
 
-
-
-app.listen(3000, () => {
-  console.log('Servidor rodando na porta 3000');
+app.listen(61203, () => {
+  console.log(`Servidor rodando na porta 61203`);
 });

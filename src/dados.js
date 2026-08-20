@@ -10,9 +10,14 @@ async function exibirUsuario(request, reply) {
       },
       // O select diz pro Prisma para trazer só esses campos
       select: {
+        id: true,
         name: true,
         email: true,
         role: true,
+        localizationLatitude: true,
+        localizationLongitude: true,
+        visualization: true,
+        isAdmin: true,
       }
     });
 

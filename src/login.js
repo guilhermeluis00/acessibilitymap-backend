@@ -43,6 +43,7 @@ async function loginUsuario(req, res) {
         name: usuario.name,
         email: usuario.email,
         role: usuario.role,
+        isAdmin: usuario.isAdmin,
       },
     });
 

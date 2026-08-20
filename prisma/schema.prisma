@@ -7,6 +7,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 /// Perfis aceitos no sistema.
@@ -19,15 +20,27 @@ enum PerfilUsuario {
 }
 
 model usuario {
-  id           String   @id @default(uuid())
-  name         String?        
-  email        String        @unique @db.VarChar(180)
-  password     String        
-  role         PerfilUsuario
-  createdat     DateTime          @default(now())
-  updatedat     DateTime          @default(now())
-  localizationLatitude String?
+  id                    String        @id @default(uuid())
+  name                  String?
+  email                 String        @unique @db.VarChar(180)
+  password              String
+  role                  PerfilUsuario
+  createdat             DateTime      @default(now())
+  updatedat             DateTime      @default(now())
+  localizationLatitude  String?
   localizationLongitude String?
-  visualization Boolean           @default(true)
+  visualization         Boolean       @default(true)
+  isAdmin               Boolean       @default(false)
+}
 
+model localAcessibilidade {
+  id                String   @id @default(uuid())
+  name              String
+  description       String?
+  latitude          String
+  longitude         String
+  accessibilityType String
+  createdat         DateTime @default(now())
+  updatedat         DateTime @default(now())
+  visualization     Boolean  @default(true)
 }
