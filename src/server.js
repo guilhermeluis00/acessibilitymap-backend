@@ -15,6 +15,8 @@ app.use(router);
 // rota de teste do backend 
 
 app.get('/test_api', async (req, res) => {
+  // escreve no console do backend
+  console.log('Rota de teste do backend acessada');
 }  )
  
 //portServer = 74203
