@@ -14,7 +14,7 @@ app.use(router);
 
 // rota de teste do backend 
 
-app.get('/teste', async (req, res) => {
+app.get('/test', async (req, res) => {
 }  )
  
 //portServer = 74203
