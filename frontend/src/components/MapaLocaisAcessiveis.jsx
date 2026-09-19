@@ -2,6 +2,8 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { APIProvider, AdvancedMarker, InfoWindow, Map, Pin, useMap, useMapsLibrary } from '@vis.gl/react-google-maps';
 import { buscarUsuario, cadastrarLocalAcessibilidade, listarLocaisAcessibilidade } from '../api';
 import accessibilityIcon from '../assets/accessibility.svg';
+import Avaliacoes from './Avaliacoes';
+import AtualizarLocalizacao from './AtualizarLocalizacao';
 
 const GOOGLE_MAPS_API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
 const CENTRO_PADRAO = { lat: -3.71839, lng: -38.5434 };
@@ -224,6 +226,10 @@ export default function MapaLocaisAcessiveis({ token, userId, isAdmin, refreshTr
       ) : (
         <aside className="locais-sidebar">
           <h2>Locais acessíveis</h2>
+          <AtualizarLocalizacao
+            token={token}
+            onAtualizado={(coords) => setLocalizacaoUsuario(coords)}
+          />
           <label className="pesquisa-locais">
             <span>Pesquisar um local</span>
             <input
@@ -257,6 +263,14 @@ export default function MapaLocaisAcessiveis({ token, userId, isAdmin, refreshTr
                         ? <p><strong>Rota:</strong> {detalhesRota.distancia || distanciaDireta} · {detalhesRota.duracao}</p>
                         : distanciaDireta && <p><strong>Distância em linha reta:</strong> {distanciaDireta}</p>}
                       <button type="button" onClick={tracarRota}>Traçar rota até o local</button>
+
+                      <Avaliacoes
+                        token={token}
+                        userId={userId}
+                        localId={local.id}
+                        mediaAvaliacoes={Number(local.mediaAvaliacoes)}
+                        totalAvaliacoes={local.totalAvaliacoes}
+                      />
                     </div>
                   )}
                 </article>
@@ -287,6 +301,14 @@ export default function MapaLocaisAcessiveis({ token, userId, isAdmin, refreshTr
                     ? <p><strong>Rota:</strong> {detalhesRota.distancia || distanciaDireta} · {detalhesRota.duracao}</p>
                     : distanciaDireta && <p><strong>Distância:</strong> aproximadamente {distanciaDireta}</p>}
                   {!isAdmin && <button type="button" onClick={tracarRota}>Traçar rota</button>}
+
+                  <Avaliacoes
+                    token={token}
+                    userId={userId}
+                    localId={selecionado.id}
+                    mediaAvaliacoes={Number(selecionado.mediaAvaliacoes)}
+                    totalAvaliacoes={selecionado.totalAvaliacoes}
+                  />
                 </div>
               </InfoWindow>
             )}

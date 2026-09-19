@@ -25,6 +25,7 @@ model usuario {
   email                 String        @unique @db.VarChar(180)
   password              String
   role                  PerfilUsuario
+  avaliacoes            Avaliacao[]
   createdat             DateTime      @default(now())
   updatedat             DateTime      @default(now())
   localizationLatitude  String?
@@ -40,7 +41,25 @@ model localAcessibilidade {
   latitude          String
   longitude         String
   accessibilityType String
+  avaliacoes        Avaliacao[]
+  mediaAvaliacoes   Float?      @default(0)
+  totalAvaliacoes   Int         @default(0)
   createdat         DateTime @default(now())
   updatedat         DateTime @default(now())
   visualization     Boolean  @default(true)
+}
+
+model Avaliacao {
+  id          String      @id @default(uuid())
+  nota        Int
+  comentario  String?
+  localId     String
+  userId      String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  local       localAcessibilidade @relation(fields: [localId], references: [id], onDelete: Cascade)
+  usuario     usuario             @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([localId, userId]) // 1 avaliação por usuário por local
 }

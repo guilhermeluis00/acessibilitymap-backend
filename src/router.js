@@ -8,6 +8,12 @@ const {
   listarLocaisAcessibilidade,
   criarLocalAcessibilidade,
 } = require('./locaisAcessibilidade');
+const {
+  listarAvaliacoes,
+  criarAvaliacao,
+  editarAvaliacao,
+  removerAvaliacao,
+} = require('./avaliacoes');
 const { autenticar, apenasAdmin } = require('./middleware/auth');
 
 const router = express.Router();
@@ -19,5 +25,10 @@ router.patch('/localizacao', autenticar, atualizarLocalizacao);
 router.get('/usuarios/mapa', autenticar, apenasAdmin, listarUsuariosVisiveis);
 router.get('/locais-acessibilidade', autenticar, listarLocaisAcessibilidade);
 router.post('/locais-acessibilidade', autenticar, apenasAdmin, criarLocalAcessibilidade);
+
+router.get('/locais-acessibilidade/:localId/avaliacoes', listarAvaliacoes);
+router.post('/locais-acessibilidade/:localId/avaliacoes', autenticar, criarAvaliacao);
+router.put('/avaliacoes/:id', autenticar, editarAvaliacao);
+router.delete('/avaliacoes/:id', autenticar, removerAvaliacao);
 
 module.exports = router;
